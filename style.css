@@ -7,12 +7,100 @@
 .app{
    width:100%;
    height:100vh;
+   background-color: lightyellow;
 }
-.head{
+.title{
    display: flex;
    height:60px;
    align-items: center;
    justify-content: center;
    background-color: lightyellow;
    font-family: 'Courier New', Courier, monospace;
+}
+
+.profile img
+{  
+   width: 120px;
+   height:120px;
+   border-radius: 10px;
+   object-fit: cover;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.sidebar{
+    width:280px;
+    height:100vh;
+    padding:30px 20px;
+    background:#fff;
+    display:flex;
+    flex-direction:column;
+}
+
+.weather-icon{
+    display:flex;
+    justify-content:center;
+}
+
+.weather-icon img{
+    width:170px;
+}
+
+.temperature{
+    margin-top:20px;
+}
+
+.temperature h1{
+    font-size:64px;
+    font-weight:300;
+}
+
+.temperature p{
+    margin-top:10px;
+    font-size:20px;
+}
+
+.temperature span{
+    color:#ff5a5a;
+}
+
+.weather-details{
+    margin-top:35px;
+    border-top:1px solid #ddd;
+    padding-top:25px;
+}
+
+.detail{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.detail img{
+    width:18px;
+}
+
+.city-card{
+    margin-top:auto;
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.city-card img{
+    width:100%;
+    display:block;
+}
+
+.city-card h3{
+    position:absolute;
+    left:15px;
+    bottom:15px;
+    color:white;
+    font-size:18px;
 }
