@@ -1,58 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Weather Cast </title>
-   <link rel="stylesheet" href="style.css">
-</head>
-<body>
-   <div class="app">
-      <div class="title">
-         <header>SkySense</header>
-      </div>
-      <div class="head">
-         <header class="nav-section">
-            <input id="SearchPlaces" type="search" placeholder="Search for Places">
-            <button>Today</button>
-            <button>Week</button>
-            <button>*C</button>
-            <button>*F</button>
-            <div class="profile">
-               <img src="assets/img24.jpg">
-            </div>
-         </header>
 
-      </div>
-      <div class="sidebar">
-         <div>
-            <img src="assets/img30.jpg" alt="">
-         </div>
-         <div>
-            <h1>12*C</h1>
-            <P>Monday,<span>16:00</span></P>
-         </div>
-         <div class="weather-details">
-            <img src="assets/" alt="">
-            <span>Mostly cloudy</span>
-         </div>
-         <div class="">
-              <img src="images/rain.png" alt="">
-            <span>Rain - 30%</span>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+
+    <link rel="stylesheet" href="style.css">
+    <title>SkySense</title>
+
+</head>
+
+<body>
+<div class="container">
+    <aside class="sidebar">
+
+
+      <!-- head -->
+
+      <h1>SkySense</h1>
+        <!-- Search -->
+
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Search for places...">
+            <i class="fa-solid fa-location-crosshairs"></i>
         </div>
 
-    </div>
+        <!-- Weather Image -->
 
-    <div class="city-card">
-        <img src="images/newyork.jpg" alt="">
-        <h3>New York, NY, USA</h3>
-    </div>
-      </div>
+        <div class="weather-image">
+            <img src="assets/weather/sun.png" alt="weather">
+        </div>
 
-   </div>
-   
-   
-   
-   <script src="script.js"></script>
+        <!-- Temperature -->
+
+        <div class="temperature">
+            <h1>12°</h1>
+            <h1>C</h1>
+        </div>
+
+        <!-- Date -->
+        
+        <div class="date-time">
+            <p class="day">Monday</p>
+            <p class="time">16:00</p>
+        </div>
+
+        <hr>
+        
+        <!-- Weather Condition -->
+
+        <div class="weather-info">
+            <div class="condition">
+                <i class="fa-solid fa-cloud"></i>
+                <span>Mostly Cloudy</span>
+            </div>
+
+            <div class="rain">
+                <i class="fa-solid fa-cloud-rain"></i>
+                <span>Rain - 30%</span>
+            </div>
+
+        </div>
+
+        <!-- City Image -->
+
+        <div class="city-card">
+            <img src="assets/images/city.jpg" alt="city">
+
+            <div class="overlay">
+                <h3>New York, USA</h3>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-bar">
+            <div class="tabs">
+                <button>Today</button>
+                <button class="active">
+                    Week
+                </button>
+
+            </div>
+
+            <div class="top-right">
+                <button class="unit active">
+                    °C
+                </button>
+                <button class="unit">
+                    °F
+                </button>
+                <img src="assets/images/profile.jpg" alt="profile" class="profile">
+
+            </div>
+
+        </header>
+
+        <!-- Forecast -->
+
+        <section class="forecast">
+            <!-- Card 1 -->
+            <div class="forecast-card">
+                <p>Sun</p>
+                <img src="assets/weather/sun.png">
+                <h4>15°-3°</h4>
+            </div>
+            <!-- Card 2 -->
+            <div class="forecast-card">
+                <p>Mon</p>
+                <img src="assets/weather/rain.png">
+                <h4>15°-7°</h4>
+            </div>
+            <!-- Card 3 -->
+            <div class="forecast-card">
+                <p>Tue</p>
+                <img src="assets/weather/rain.png">
+                <h4>9°-7°</h4>
+            </div>
+            <!-- Card 4 -->
+            <div class="forecast-card">
+                <p>Wed</p>
+                <img src="assets/weather/rain.png">
+                <h4>15°-3°</h4>
+            </div>
+            <!-- Card 5 -->
+            <div class="forecast-card">
+                <p>Thu</p>
+                <img src="assets/weather/wind.png">
+                <h4>15°-3°</h4>
+            </div>
+            <!-- Card 6 -->
+            <div class="forecast-card">
+                <p>Fri</p>
+                <img src="assets/weather/sun.png">
+                <h4>15°-3°</h4>
+            </div>
+            <!-- Card 7 -->
+            <div class="forecast-card">
+                <p>Sat</p>
+                <img src="assets/weather/sun.png">
+                <h4>15°-3°</h4>
+            </div>
+        </section>
+
+        <!-- Highlights -->
+
+        <section class="highlights">
+            <h2>Today's Highlights</h2>
+            <!-- Cards will be added in Part 2 -->
+        </section>
+    </main>
+</div>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
