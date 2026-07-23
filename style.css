@@ -27,7 +27,7 @@ body{
 }
 
 .sidebar{
-    background:rgb(255, 255, 235);
+    background:rgb(255, 255, 236);
     padding:30px;
     display:flex;
     flex-direction:column;
