@@ -96,60 +96,38 @@ body{
 
 hr{
     border:none;
-    height:1px;
+    height:3px;
     background:#ececec;
     margin:20px 0;
 }
 
 .weather-info{
-
     display:flex;
-
     flex-direction:column;
-
     gap:15px;
-
 }
 
 .condition,
 .rain{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
-
     color:#555;
-
 }
 
 .condition i{
-
     color:#f4c542;
-
 }
 
 .rain i{
-
-    color:#6d8cff;
-
+    color:lightblue;
 }
 
-/* ==========================
-      CITY CARD
-========================== */
-
 .city-card{
-
     margin-top:40px;
-
     position:relative;
-
     border-radius:20px;
-
     overflow:hidden;
-
 }
 
 .city-card img{
