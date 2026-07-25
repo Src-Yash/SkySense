@@ -1,11 +1,20 @@
-async function getWeather(){
-    const response = await fetch("https://api.weatherapi.com/v1/current.json?key=82c6260c88cb444aa5604743262507&q= Ghaziabad")
+let temperature = document.getElementById("temperature");
+let cityName = document.getElementById("city-name");
+let weatherCondition = document.getElementById("weather-condition");
+let weatherIcon = document.getElementById("weather-icon")
+let searchInput = document.getElementById("search-input");
+
+
+
+async function getWeather(city){
+    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=82c6260c88cb444aa5604743262507&q=${city}`)
     const data = await response.json();
-    console.log(data.current.temp_c);
-    console.log(data.current.temp_f);
-    console.log(data.current.wind_kph);
-    console.log(data.location.country);
+    temperature.innerText = data.current.temp_c + "°";
+    cityName.innerText = data.location.name + ", " + data.location.country;
+    weatherCondition.innerText = data.current.condition.text;
     console.log(data);
 }
 
-getWeather();
+getWeather("Ghaziabad");
+
+
