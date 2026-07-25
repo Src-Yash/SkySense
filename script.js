@@ -3,7 +3,7 @@ let cityName = document.getElementById("city-name");
 let weatherCondition = document.getElementById("weather-condition");
 let weatherIcon = document.getElementById("weather-icon")
 let searchInput = document.getElementById("search-input");
-
+let searchBtn = document.getElementById("search-btn");
 
 
 async function getWeather(city){
