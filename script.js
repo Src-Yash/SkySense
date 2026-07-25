@@ -6,7 +6,7 @@ let searchInput = document.getElementById("search-input");
 let searchBtn = document.getElementById("search-btn");
 
 function searchWeather(){
-   const city = searchInput.ariaValueMax.trim();
+   const city = searchInput.value.trim();
 
    if(city === ""){
       alert("Please enter the city");
@@ -18,21 +18,27 @@ function searchWeather(){
 searchBtn.addEventListener("click",searchWeather);
 
 searchInput.addEventListener("keydown",(event) => {
-   if(event.key==="Enter");
+   if(event.key==="Enter")
      { 
       searchWeather();
      }
 });
 
 async function getWeather(city){
+
+    try{
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=82c6260c88cb444aa5604743262507&q=${city}`)
     const data = await response.json();
-    temperature.innerText = data.current.temp_c + "°";
-    cityName.innerText = data.location.name + ", " + data.location.country;
+    temperature.innerText = data.current.temp_c+"°";
+    cityName.innerText = data.location.name + "," + data.location.country;
     weatherCondition.innerText = data.current.condition.text;
-    console.log(data);
+    }
+
+    catch(error){
+      alert("Please enter a valid city");
+    }
 }
 
-getWeather("Ghaziabad");
+getWeather("New Delhi");
 
 
