@@ -10,6 +10,10 @@ function searchWeather(){
 
    if(city === ""){
       alert("Please enter the city");
+      temperature.innerText = "0°";
+      cityName.innerText = "--";
+      weatherCondition.innerText = "--";
+      weatherIcon.src = "assets/weather/default.png";
       return;
    }
 
@@ -32,7 +36,9 @@ async function getWeather(city){
     temperature.innerText = data.current.temp_c+"°";
     cityName.innerText = data.location.name + "," + data.location.country;
     weatherCondition.innerText = data.current.condition.text;
-    }
+    console.log(data);
+    weatherIcon.src = `https:${data.current.condition.icon}`;
+   }
 
     catch(error){
       alert("Please enter a valid city");
