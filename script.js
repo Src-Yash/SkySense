@@ -7,6 +7,12 @@ let searchInput = document.getElementById("search-input");
 let searchBtn = document.getElementById("search-btn");
 let humidityElement = document.getElementById("humidity");
 let humiditylevel = document.getElementById("humidityLevel");
+let windSpeedElement = document.getElementById("windSpeed");
+let speedlevelElement = document.getElementById("speedLevel");
+let feelsLikeElement = document.getElementById("feelsLike");
+let feelsLevel = document.getElementById("feel");
+let ctx = document.getElementById("uvChart");
+let uvIndexElement = document.getElementById("uvValue");
 
 function resetWeather(){
    temperature.innerText = "0°";
@@ -47,8 +53,68 @@ function getHumidity(humidity){
       return "High";
    else
       return "Very High";  
-   
 }
+
+function getWindLevel(windSpeed) {
+    if (windSpeed < 5)
+        return "Calm 🌿";
+    else if (windSpeed <= 20)
+        return "Light Breeze 🍃";
+    else if (windSpeed <= 40)
+        return "Windy 🌬️";
+    else if (windSpeed <= 60)
+        return "Strong Wind 💨";
+    else
+        return "Storm ⚠️";
+
+}
+
+function getFeelsLikeLevel(feelsLike) {
+    if (feelsLike < 14)
+        return "🥶 Very Cold";
+    else if (feelsLike < 27)
+        return "🧥 Cool";
+    else if (feelsLike < 32)
+        return "😊 Pleasant";
+    else if (feelsLike < 40)
+        return "🥵 Hot";
+    else
+        return "🔥 Extremely Hot";
+}
+
+// chart for UV index
+
+let uvChart = new Chart(ctx,{
+   type:"doughnut",
+   data:{
+      datasets:[{
+         data:[2,9],
+         borderWidth:0,
+         backgroundColor:["orange","grey"],
+         borderRadius:2,
+         Animation:{
+            duration:1500
+         },
+         spacing:3
+        
+      }]
+   },
+   options:{
+      responsive:true,
+      rotation:-90,
+      circumference:180,
+      cutout:"65%",
+      plugins:{
+         legend:{
+            display:false
+         },
+            tooltip:{
+               enabled:false
+            }
+         }
+      
+   }
+});
 
 async function getWeather(city){
 
@@ -65,11 +131,27 @@ async function getWeather(city){
     cityName.innerText = data.location.name + "," + data.location.country;
     weatherCondition.innerText = data.current.condition.text;
    //  weatherRain.innerText = data.value;
-    console.log(data);
-    weatherIcon.src = `https:${data.current.condition.icon}`;
-    const humidityValue = data.current.humidity;
-    humidityElement.innerText = data.current.humidity + "%";
-    humiditylevel.innerText = getHumidity(humidityValue);
+   console.log(data);
+   weatherIcon.src = `https:${data.current.condition.icon}`;
+   const humidityValue = data.current.humidity;
+   humidityElement.innerText = data.current.humidity + "%";
+   humiditylevel.innerText = getHumidity(humidityValue);
+   const windSpeedValue = data.current.wind_kph;
+   windSpeedElement.innerText = data.current.wind_kph + "Km/h";
+   speedlevelElement.innerText = getWindLevel(windSpeedValue);
+   const feelslikeValue = data.current.feelslike_c;
+   feelsLikeElement.innerText = data.current.feelslike_c;
+   feelsLevel.innerText = getFeelsLikeLevel(feelslikeValue);
+   const uv = data.current.uv;
+   uvChart.data.datasets[0].data = [uv,11-uv];
+   uvChart.update();
+   uvIndexElement.innerText = data.current.uv;
+   
+
+
+
+
+
    }
 
     catch(error){
