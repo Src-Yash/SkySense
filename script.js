@@ -13,6 +13,8 @@ let feelsLikeElement = document.getElementById("feelsLike");
 let feelsLevel = document.getElementById("feel");
 let ctx = document.getElementById("uvChart");
 let uvIndexElement = document.getElementById("uvValue");
+let visibilityElement = document.getElementById("visibility");
+let visibilityLevel = document.getElementById("visible");
 
 function resetWeather(){
    temperature.innerText = "0°";
@@ -70,16 +72,29 @@ function getWindLevel(windSpeed) {
 }
 
 function getFeelsLikeLevel(feelsLike) {
-    if (feelsLike < 14)
-        return "🥶 Very Cold";
-    else if (feelsLike < 27)
-        return "🧥 Cool";
-    else if (feelsLike < 32)
-        return "😊 Pleasant";
-    else if (feelsLike < 40)
-        return "🥵 Hot";
-    else
-        return "🔥 Extremely Hot";
+   if (feelsLike < 14)
+      return "🥶 Very Cold";
+   else if (feelsLike < 27)
+      return "🧥 Cool";
+   else if (feelsLike < 32)
+      return "😊 Pleasant";
+   else if (feelsLike < 40)
+      return "🥵 Hot";
+   else
+      return "🔥 Extremely Hot";
+}
+function getVisibiltyLevel(visibility){
+   if(visibility < 1)
+      return "Very Poor";
+   else if(visibility <= 4)
+      return "Poor ";
+   else if(visibility <= 10)
+      return "Moderate";
+   else if(visibility <=20)
+      return "Good";
+   else
+      return "Excellent";
+
 }
 
 // chart for UV index
@@ -139,13 +154,20 @@ async function getWeather(city){
    const windSpeedValue = data.current.wind_kph;
    windSpeedElement.innerText = data.current.wind_kph + "Km/h";
    speedlevelElement.innerText = getWindLevel(windSpeedValue);
+
    const feelslikeValue = data.current.feelslike_c;
    feelsLikeElement.innerText = data.current.feelslike_c;
    feelsLevel.innerText = getFeelsLikeLevel(feelslikeValue);
+
    const uv = data.current.uv;
    uvChart.data.datasets[0].data = [uv,11-uv];
    uvChart.update();
    uvIndexElement.innerText = data.current.uv;
+
+   const visibleIndex = data.current.vis_km;
+   visibilityElement.innerText = data.current.vis_km + "Km";
+   visibilityLevel.innerText =getVisibiltyLevel(visibleIndex);
+
    
 
 

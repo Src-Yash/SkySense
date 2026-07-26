@@ -298,3 +298,9 @@ hr{
     font-size: 25px;
     font-weight: bold;
 }
+#visibility{
+    color:#4a4a4a;
+}
+#visible{
+    color:#2a2a2a;
+}
