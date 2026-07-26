@@ -262,4 +262,16 @@ hr{
     padding: 20px;
     border-radius: 15px;
 }
+.card h3{
+    font-weight: 20px;
+    color:#757575;
+    margin-bottom:18px;
+}
+.card h1{
+    margin-bottom: 15px;
+    color:#4a4a4a;
+}
+#humidityLevel{
+    color:#2a2a2a;
+}
 

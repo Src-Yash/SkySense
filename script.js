@@ -5,8 +5,8 @@ let weatherCondition = document.getElementById("weather-condition");
 let weatherIcon = document.getElementById("weather-icon")
 let searchInput = document.getElementById("search-input");
 let searchBtn = document.getElementById("search-btn");
-let humidity = document.getElementById("humidity");
-
+let humidityElement = document.getElementById("humidity");
+let humiditylevel = document.getElementById("humidityLevel");
 
 function resetWeather(){
    temperature.innerText = "0°";
@@ -38,6 +38,18 @@ searchInput.addEventListener("keydown",(event) => {
      }
 });
 
+function getHumidity(humidity){
+   if(humidity<30)
+      return "low";
+   else if(humidity<=60)
+      return "Normal";
+   else if(humidity<=80)
+      return "High";
+   else
+      return "Very High";  
+   
+}
+
 async function getWeather(city){
 
    try{
@@ -55,7 +67,9 @@ async function getWeather(city){
    //  weatherRain.innerText = data.value;
     console.log(data);
     weatherIcon.src = `https:${data.current.condition.icon}`;
-    humidity = data.current.humidity + "%";
+    const humidityValue = data.current.humidity;
+    humidityElement.innerText = data.current.humidity + "%";
+    humiditylevel.innerText = getHumidity(humidityValue);
    }
 
     catch(error){
@@ -64,6 +78,7 @@ async function getWeather(city){
       console.log(error);
     }
 }
+
 
 getWeather("New Delhi");
 
