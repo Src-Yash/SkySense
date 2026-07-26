@@ -15,6 +15,11 @@ let ctx = document.getElementById("uvChart");
 let uvIndexElement = document.getElementById("uvValue");
 let visibilityElement = document.getElementById("visibility");
 let visibilityLevel = document.getElementById("visible");
+let pressureElement = document.getElementById("pressure");
+let pressurelevel = document.getElementById("pressureLevel");
+let dayElement = document.getElementById("todaysDay");
+let timeElement = document.getElementById("todaysTime");
+
 
 function resetWeather(){
    temperature.innerText = "0°";
@@ -59,29 +64,29 @@ function getHumidity(humidity){
 
 function getWindLevel(windSpeed) {
     if (windSpeed < 5)
-        return "Calm 🌿";
+        return "Calm";
     else if (windSpeed <= 20)
-        return "Light Breeze 🍃";
+        return "Light Breeze";
     else if (windSpeed <= 40)
-        return "Windy 🌬️";
+        return "Windy ";
     else if (windSpeed <= 60)
-        return "Strong Wind 💨";
+        return "Strong Wind";
     else
-        return "Storm ⚠️";
+        return "Storm";
 
 }
 
 function getFeelsLikeLevel(feelsLike) {
    if (feelsLike < 14)
-      return "🥶 Very Cold";
+      return "Very Cold";
    else if (feelsLike < 27)
-      return "🧥 Cool";
+      return "Cool";
    else if (feelsLike < 32)
-      return "😊 Pleasant";
+      return "Pleasant";
    else if (feelsLike < 40)
-      return "🥵 Hot";
+      return "Hot";
    else
-      return "🔥 Extremely Hot";
+      return "Extremely Hot";
 }
 function getVisibiltyLevel(visibility){
    if(visibility < 1)
@@ -95,6 +100,18 @@ function getVisibiltyLevel(visibility){
    else
       return "Excellent";
 
+}
+
+function getPressureLevel(pressure){
+   if(pressure < 1000)
+      return "Low";
+   else if(pressure <= 1020)
+      return "Normal";
+   else if(pressure <= 1030)
+      return "High";
+   else{
+      return  "Very High";
+   }
 }
 
 // chart for UV index
@@ -135,8 +152,10 @@ async function getWeather(city){
 
    try{
    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=82c6260c88cb444aa5604743262507&q=${city}`);
-   
    const data = await response.json();
+
+  
+  
    if(data.error){
       alert(data.error.message);
       resetWeather();
@@ -168,10 +187,27 @@ async function getWeather(city){
    visibilityElement.innerText = data.current.vis_km + "Km";
    visibilityLevel.innerText =getVisibiltyLevel(visibleIndex);
 
+   const press = data.current.pressure_mb;
+   pressureElement.innerText = data.current.pressure_mb + "mb";
+   pressurelevel.innerText = getPressureLevel(press);
+
+
+   // time and day updation
+
+   timeElement.innerText = data.current.last_updated;
    
+   const date = new Date(data.location.localtime);
+   const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+   ];
 
-
-
+   dayElement.innerText = days[date.getDay()];
 
 
    }
