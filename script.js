@@ -1,15 +1,18 @@
 let temperature = document.getElementById("temperature");
 let cityName = document.getElementById("city-name");
 let weatherCondition = document.getElementById("weather-condition");
+// let weatherRain = document.getElementById("weather-condition-icon");
 let weatherIcon = document.getElementById("weather-icon")
 let searchInput = document.getElementById("search-input");
 let searchBtn = document.getElementById("search-btn");
+let humidity = document.getElementById("humidity");
 
 
 function resetWeather(){
    temperature.innerText = "0°";
    cityName.innerText = "--";
    weatherCondition.innerText = "--";
+   // weatherRain.innerText="--";
    weatherIcon.src = "assets/weather/default.png";
 
 }
@@ -49,8 +52,10 @@ async function getWeather(city){
     temperature.innerText = data.current.temp_c+"°";
     cityName.innerText = data.location.name + "," + data.location.country;
     weatherCondition.innerText = data.current.condition.text;
+   //  weatherRain.innerText = data.value;
     console.log(data);
     weatherIcon.src = `https:${data.current.condition.icon}`;
+    humidity = data.current.humidity + "%";
    }
 
     catch(error){

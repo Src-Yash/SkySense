@@ -253,4 +253,13 @@ hr{
     font-weight:600;
 }
 
+.highlight-grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:20px;
+}
+.card{
+    padding: 20px;
+    border-radius: 15px;
+}
 
