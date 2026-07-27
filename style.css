@@ -214,7 +214,7 @@ hr{
     overflow: hidden;
 }
 
-.forecast{
+.forecast-container{
     display:grid;
     grid-template-columns:repeat(7,1fr);
     gap:18px;
