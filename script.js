@@ -19,6 +19,7 @@ let pressureElement = document.getElementById("pressure");
 let pressurelevel = document.getElementById("pressureLevel");
 let dayElement = document.getElementById("todaysDay");
 let timeElement = document.getElementById("todaysTime");
+let forecastContainer = document.querySelector(".forecast-container");
 
 
 function resetWeather(){
@@ -151,8 +152,9 @@ let uvChart = new Chart(ctx,{
 async function getWeather(city){
 
    try{
-   const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=82c6260c88cb444aa5604743262507&q=${city}`);
+   const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=82c6260c88cb444aa5604743262507&q=${city}&days=5`)
    const data = await response.json();
+   console.log(data);
 
   
   
@@ -209,6 +211,25 @@ async function getWeather(city){
 
    dayElement.innerText = days[date.getDay()];
 
+   // forecast Container
+
+   forecastContainer.innerHTML="";
+   for(let i=0 ; i < data.forecast.forecastday.length; i++){
+      const card = document.createElement("div");
+      card.classList.add("forecast-card");
+      forecastContainer.appendChild(card);
+      const forecast = data.forecast.forecastday[i];
+      card.innerHTML = `
+          <p>${forecast.date}</p>
+          <img src="https:${forecast.day.condition.icon}" alt="Weather">
+          <h3>${forecast.day.maxtemp_c}°C</h3>
+          <p>${forecast.day.mintemp_c}°C</p>
+          <p>${forecast.day.condition.text}</p>
+      `;
+      forecastContainer.appendChild(card);
+   }
+ 
+   
 
    }
 
