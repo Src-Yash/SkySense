@@ -6,7 +6,7 @@
 
 body{
     font-family:"Poppins",sans-serif;
-    background: rgb(237, 232, 232);
+    background: rgb(227, 227, 227);
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -27,12 +27,14 @@ body{
 }
 
 .sidebar{
-    background:rgb(255, 255, 236);
+    background: #ffe8e8;
+    background: #dcadf0;
+    background: linear-gradient(123deg, rgba(220, 173, 240, 1) 0%, rgba(189, 220, 240, 1) 47%, rgba(214, 255, 253, 1) 82%);
     padding:30px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    border-right:1px solid #d7d7d7;
+    border-right:1px solid white;
 }
 
 .search-box{
@@ -154,7 +156,8 @@ hr{
 
 .main-content{
     padding:40px;
-    background:rgb(255, 255, 236);
+    background: #c4eaf5;
+    background: linear-gradient(123deg, rgba(153, 190, 255, 1) 44%, rgba(255, 214, 245, 1) 82%);
 }
 
 .top-bar{
@@ -323,5 +326,5 @@ hr{
     font-weight: bold;
 }
 #Sunrise,#Sunset{
-    color:#4a4a4a;
+    color:#2a2a2a;
 }
