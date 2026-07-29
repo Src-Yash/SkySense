@@ -280,10 +280,10 @@ hr{
     color:#2a2a2a;
 
 }
-#feel{
+/* #feel{
     color:#2a2a2a;
 
-}
+} */
 
 
 .uv-gauge{
@@ -314,4 +314,14 @@ hr{
 #pressureLevel{
     color:#2a2a2a;
 
+}
+
+.sunBox{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    font-weight: bold;
+}
+#Sunrise,#Sunset{
+    color:#4a4a4a;
 }

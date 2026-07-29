@@ -9,8 +9,8 @@ let humidityElement = document.getElementById("humidity");
 let humiditylevel = document.getElementById("humidityLevel");
 let windSpeedElement = document.getElementById("windSpeed");
 let speedlevelElement = document.getElementById("speedLevel");
-let feelsLikeElement = document.getElementById("feelsLike");
-let feelsLevel = document.getElementById("feel");
+// let feelsLikeElement = document.getElementById("feelsLike");
+// let feelsLevel = document.getElementById("feel");
 let ctx = document.getElementById("uvChart");
 let uvIndexElement = document.getElementById("uvValue");
 let visibilityElement = document.getElementById("visibility");
@@ -20,6 +20,8 @@ let pressurelevel = document.getElementById("pressureLevel");
 let dayElement = document.getElementById("todaysDay");
 let timeElement = document.getElementById("todaysTime");
 let forecastContainer = document.querySelector(".forecast-container");
+let sunriseElement = document.getElementById("Sunrise");
+let sunsetElement =document.getElementById("Sunset");
 
 
 function resetWeather(){
@@ -77,18 +79,18 @@ function getWindLevel(windSpeed) {
 
 }
 
-function getFeelsLikeLevel(feelsLike) {
-   if (feelsLike < 14)
-      return "Very Cold";
-   else if (feelsLike < 27)
-      return "Cool";
-   else if (feelsLike < 32)
-      return "Pleasant";
-   else if (feelsLike < 40)
-      return "Hot";
-   else
-      return "Extremely Hot";
-}
+// function getFeelsLikeLevel(feelsLike) {
+//    if (feelsLike < 14)
+//       return "Very Cold";
+//    else if (feelsLike < 27)
+//       return "Cool";
+//    else if (feelsLike < 32)
+//       return "Pleasant";
+//    else if (feelsLike < 40)
+//       return "Hot";
+//    else
+//       return "Extremely Hot";
+// }
 function getVisibiltyLevel(visibility){
    if(visibility < 1)
       return "Very Poor";
@@ -177,9 +179,9 @@ async function getWeather(city){
    windSpeedElement.innerText = data.current.wind_kph + "Km/h";
    speedlevelElement.innerText = getWindLevel(windSpeedValue);
 
-   const feelslikeValue = data.current.feelslike_c;
-   feelsLikeElement.innerText = data.current.feelslike_c;
-   feelsLevel.innerText = getFeelsLikeLevel(feelslikeValue);
+   // const feelslikeValue = data.current.feelslike_c;
+   // feelsLikeElement.innerText = data.current.feelslike_c;
+   // feelsLevel.innerText = getFeelsLikeLevel(feelslikeValue);
 
    const uv = data.current.uv;
    uvChart.data.datasets[0].data = [uv,11-uv];
@@ -230,8 +232,16 @@ async function getWeather(city){
       
       `;
       forecastContainer.appendChild(card);
+
+      // sunrise & sunset
+      
+      sunriseElement.innerText=data.forecast.forecastday[0].astro.sunrise;
+      sunsetElement.innerText=data.forecast.forecastday[0].astro.sunset;
+
+
    }
  
+
    }
 
     catch(error){
