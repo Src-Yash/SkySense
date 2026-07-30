@@ -22,6 +22,8 @@ let timeElement = document.getElementById("todaysTime");
 let forecastContainer = document.querySelector(".forecast-container");
 let sunriseElement = document.getElementById("Sunrise");
 let sunsetElement =document.getElementById("Sunset");
+let celsiElement = document.getElementById("celsi");
+let farhenElement = document.getElementById("farhen")
 
 
 function resetWeather(){
@@ -159,6 +161,7 @@ async function getWeather(city){
    console.log(data);
    console.log(data.forecast.forecastday[0].astro);
 
+
   
   
    if(data.error){
@@ -192,10 +195,10 @@ async function getWeather(city){
    visibilityElement.innerText = data.current.vis_km + "Km";
    visibilityLevel.innerText =getVisibiltyLevel(visibleIndex);
 
+
    const press = data.current.pressure_mb;
    pressureElement.innerText = data.current.pressure_mb + "mb";
    pressurelevel.innerText = getPressureLevel(press);
-
 
    // time and day updation
 
