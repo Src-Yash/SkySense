@@ -26,6 +26,8 @@ let celsiElement = document.getElementById("celsi");
 let farhenElement = document.getElementById("farhen")
 let currentUnit = "C";
 let weatherData = null;
+let cityImage = document.getElementById("cityImage");
+
 
 
 celsiElement.addEventListener("click", () => {
@@ -231,8 +233,6 @@ async function getWeather(city){
    const data = await response.json();
    console.log(data);
 
-   
-   
    // console.log(data.forecast.forecastday[0].day.mintemp_f);
    
    
@@ -311,13 +311,14 @@ async function getWeather(city){
 
       // sunrise & sunset
       
-      sunriseElement.innerText=data.forecast.forecastday[0].astro.sunrise;
-      sunsetElement.innerText=data.forecast.forecastday[0].astro.sunset;
+      
+   sunriseElement.innerText=data.forecast.forecastday[0].astro.sunrise;
+      
+   sunsetElement.innerText=data.forecast.forecastday[0].astro.sunset;
 
 
    // }
  
-
    }
 
     catch(error){
@@ -326,6 +327,11 @@ async function getWeather(city){
       console.log(error);
     }
 }
+
+// async function updateCityImage(city){
+//    const image = await fetch(`https://apiunsplash.com/search/photos?query=${city}&client_id=`)
+   
+// }
 
 
 getWeather("New Delhi");
