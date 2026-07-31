@@ -188,11 +188,11 @@ hr{
 }
 
 .top-right{
-
     display:flex;
     align-items:center;
     gap:15px;
 }
+
 
 .unit{
     width:42px;

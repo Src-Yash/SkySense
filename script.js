@@ -30,12 +30,18 @@ let weatherData = null;
 
 celsiElement.addEventListener("click", () => {
     currentUnit = "C";
+   //  celsiElement.style.backgroundColor="black";
+    celsiElement.style.background="#FFC5AA";
+  
+
+
    //  celsiElement.classList.
     updateTemperature();
 });
 
 farhenElement.addEventListener("click", () => {
     currentUnit = "F";
+    farhenElement.style.background="#FFC5AA";
     updateTemperature();
 });
 
@@ -112,7 +118,8 @@ function updateTemperature(){
             weekday:"short"
          })}</p>
          <img src="${forecast.day.condition.icon}" alt="">
-         <h4>${forecast.day.maxtemp_c}°C</h4>
+         <p>${forecast.day.maxtemp_c}°C</p>
+         <hr>
          <p>${forecast.day.mintemp_c}°C</p>
          `;
          forecastContainer.appendChild(card);
@@ -121,7 +128,7 @@ function updateTemperature(){
    else{
       temperature.innerText=`${weatherData.current.temp_f}°F`;
       forecastContainer.innerHTML="";
-      weatherData.forecast.forecastday.forEach(forcast =>{
+      weatherData.forecast.forecastday.forEach(forecast =>{
          const card = document.createElement("div");
          card.classList.add("forecast-card");
          card.innerHTML=`
@@ -129,7 +136,8 @@ function updateTemperature(){
                     weekday: "short"
                 })}</p>
                 <img src="${forecast.day.condition.icon}" alt="">
-                <h4>${forecast.day.maxtemp_f}°F</h4>
+                <p>${forecast.day.maxtemp_f}°F</p>
+                <hr>
                 <p>${forecast.day.mintemp_f}°F</p>
                 `
          forecastContainer.appendChild(card);
