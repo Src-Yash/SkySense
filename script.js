@@ -24,6 +24,8 @@ let sunriseElement = document.getElementById("Sunrise");
 let sunsetElement =document.getElementById("Sunset");
 let celsiElement = document.getElementById("celsi");
 let farhenElement = document.getElementById("farhen")
+let currentUnit = "C";
+let weatherData = null;
 
 
 function resetWeather(){
@@ -80,6 +82,47 @@ function getWindLevel(windSpeed) {
         return "Storm";
 
 }
+
+function updateTemperature(){
+   if(!weatherData) return;
+   if(currentUnit === "C"){
+      temperature.innerText = `${weatherData.current.temp_c}°C`;
+      forcastContainer.innerHTML="";
+      weatherData.forecast.forecastday.forEach(forecast => {
+         const card = document.createElement("div");
+         card.classList.add("forcast-card");
+         card.innerHTML=`
+         <p>${new Date(forecast.date).toLocaleDateString("en-US",{
+            weekday:"short"
+         })}</p>
+         <img src="${forecast.day.condition.icon}" alt="">
+         <h4>${forecast.day.maxtemp_c}°C</h4>
+         <p>${forecast.day.mintemp_c}°C</p>
+         `;
+         forcastContainer.appendChild(card);
+         
+      });
+   }
+   else{
+      temperature.innerText=`${weatherData.current.temp_f}°F`;
+      forcastContainer.innerHTML="";
+      weatherData.forecast.forecastday.forEach(forcast =>{
+         const card=document.createElement("div");
+         card.classList.add("forcast-card");
+         card.innerHTML=`
+         <p>${new Date(forecast.date).toLocaleDateString("en-US", {
+                    weekday: "short"
+                })}</p>
+                <img src="${forecast.day.condition.icon}" alt="">
+                <h4>${forecast.day.maxtemp_f}°F</h4>
+                <p>${forecast.day.mintemp_f}°F</p>
+         `
+      });
+      forcastContainer.appendChild(card);
+
+   }
+}
+
 
 // function getFeelsLikeLevel(feelsLike) {
 //    if (feelsLike < 14)
@@ -159,8 +202,12 @@ async function getWeather(city){
    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=82c6260c88cb444aa5604743262507&q=${city}&days=7`)
    const data = await response.json();
    console.log(data);
-   console.log(data.forecast.forecastday[0].astro);
+ 
+   weatherData = data;
+   updateTemperature();
 
+
+   // console.log(data.forecast.forecastday[0].day.mintemp_f);
 
   
   
@@ -173,7 +220,7 @@ async function getWeather(city){
     cityName.innerText = data.location.name + "," + data.location.country;
     weatherCondition.innerText = data.current.condition.text;
    //  weatherRain.innerText = data.value;
-   console.log(data);
+   // console.log(data);
    weatherIcon.src = `https:${data.current.condition.icon}`;
    const humidityValue = data.current.humidity;
    humidityElement.innerText = data.current.humidity + "%";
