@@ -28,13 +28,24 @@ let currentUnit = "C";
 let weatherData = null;
 
 
+celsiElement.addEventListener("click", () => {
+    currentUnit = "C";
+   //  celsiElement.classList.
+    updateTemperature();
+});
+
+farhenElement.addEventListener("click", () => {
+    currentUnit = "F";
+    updateTemperature();
+});
+
+
 function resetWeather(){
    temperature.innerText = "0°";
    cityName.innerText = "--";
    weatherCondition.innerText = "--";
    // weatherRain.innerText="--";
    weatherIcon.src = "assets/weather/default.png";
-
 }
 
 
@@ -49,6 +60,8 @@ function searchWeather(){
 
    getWeather(city);
 }
+
+
 searchBtn.addEventListener("click",searchWeather);
 
 searchInput.addEventListener("keydown",(event) => {
@@ -57,6 +70,7 @@ searchInput.addEventListener("keydown",(event) => {
       searchWeather();
      }
 });
+
 
 function getHumidity(humidity){
    if(humidity<30)
@@ -68,6 +82,7 @@ function getHumidity(humidity){
    else
       return "Very High";  
 }
+
 
 function getWindLevel(windSpeed) {
     if (windSpeed < 5)
@@ -83,14 +98,15 @@ function getWindLevel(windSpeed) {
 
 }
 
+
 function updateTemperature(){
    if(!weatherData) return;
    if(currentUnit === "C"){
       temperature.innerText = `${weatherData.current.temp_c}°C`;
-      forcastContainer.innerHTML="";
+      forecastContainer.innerHTML="";
       weatherData.forecast.forecastday.forEach(forecast => {
          const card = document.createElement("div");
-         card.classList.add("forcast-card");
+         card.classList.add("forecast-card");
          card.innerHTML=`
          <p>${new Date(forecast.date).toLocaleDateString("en-US",{
             weekday:"short"
@@ -99,16 +115,15 @@ function updateTemperature(){
          <h4>${forecast.day.maxtemp_c}°C</h4>
          <p>${forecast.day.mintemp_c}°C</p>
          `;
-         forcastContainer.appendChild(card);
-         
+         forecastContainer.appendChild(card);
       });
    }
    else{
       temperature.innerText=`${weatherData.current.temp_f}°F`;
-      forcastContainer.innerHTML="";
+      forecastContainer.innerHTML="";
       weatherData.forecast.forecastday.forEach(forcast =>{
-         const card=document.createElement("div");
-         card.classList.add("forcast-card");
+         const card = document.createElement("div");
+         card.classList.add("forecast-card");
          card.innerHTML=`
          <p>${new Date(forecast.date).toLocaleDateString("en-US", {
                     weekday: "short"
@@ -116,9 +131,9 @@ function updateTemperature(){
                 <img src="${forecast.day.condition.icon}" alt="">
                 <h4>${forecast.day.maxtemp_f}°F</h4>
                 <p>${forecast.day.mintemp_f}°F</p>
-         `
+                `
+         forecastContainer.appendChild(card);
       });
-      forcastContainer.appendChild(card);
 
    }
 }
@@ -136,6 +151,8 @@ function updateTemperature(){
 //    else
 //       return "Extremely Hot";
 // }
+
+
 function getVisibiltyLevel(visibility){
    if(visibility < 1)
       return "Very Poor";
@@ -149,6 +166,7 @@ function getVisibiltyLevel(visibility){
       return "Excellent";
 
 }
+
 
 function getPressureLevel(pressure){
    if(pressure < 1000)
@@ -172,7 +190,7 @@ let uvChart = new Chart(ctx,{
          borderWidth:0,
          backgroundColor:["orange","grey"],
          borderRadius:2,
-         Animation:{
+         animation:{
             duration:1500
          },
          spacing:3
@@ -202,23 +220,20 @@ async function getWeather(city){
    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=82c6260c88cb444aa5604743262507&q=${city}&days=7`)
    const data = await response.json();
    console.log(data);
- 
-   weatherData = data;
-   updateTemperature();
 
-
+   
+   
    // console.log(data.forecast.forecastday[0].day.mintemp_f);
-
-  
-  
+   
+   
    if(data.error){
       alert(data.error.message);
       resetWeather();
       return;
    }
-    temperature.innerText = data.current.temp_c+"°";
-    cityName.innerText = data.location.name + "," + data.location.country;
-    weatherCondition.innerText = data.current.condition.text;
+   // temperature.innerText = data.current.temp_c+"°";
+   cityName.innerText = data.location.name + "," + data.location.country;
+   weatherCondition.innerText = data.current.condition.text;
    //  weatherRain.innerText = data.value;
    // console.log(data);
    weatherIcon.src = `https:${data.current.condition.icon}`;
@@ -228,27 +243,27 @@ async function getWeather(city){
    const windSpeedValue = data.current.wind_kph;
    windSpeedElement.innerText = data.current.wind_kph + "Km/h";
    speedlevelElement.innerText = getWindLevel(windSpeedValue);
-
+   
    // const feelslikeValue = data.current.feelslike_c;
    // feelsLikeElement.innerText = data.current.feelslike_c;
    // feelsLevel.innerText = getFeelsLikeLevel(feelslikeValue);
-
+   
    const uv = data.current.uv;
    uvChart.data.datasets[0].data = [uv,11-uv];
    uvChart.update();
    uvIndexElement.innerText = data.current.uv;
-
+   
    const visibleIndex = data.current.vis_km;
    visibilityElement.innerText = data.current.vis_km + "Km";
    visibilityLevel.innerText =getVisibiltyLevel(visibleIndex);
-
-
+   
+   
    const press = data.current.pressure_mb;
    pressureElement.innerText = data.current.pressure_mb + "mb";
    pressurelevel.innerText = getPressureLevel(press);
-
+   
    // time and day updation
-
+   
    timeElement.innerText = data.current.last_updated;
    
    const date = new Date(data.location.localtime);
@@ -261,27 +276,28 @@ async function getWeather(city){
       "Friday",
       "Saturday"
    ];
-
+   
    dayElement.innerText = days[date.getDay()];
-
+   
    // forecast Container
-
-   forecastContainer.innerHTML="";
-   for(let i=0 ; i < data.forecast.forecastday.length; i++){
-      const forecast = data.forecast.forecastday[i];
-      const dayName = new Date(forecast.date).toLocaleDateString("en-US", {
-         weekday: "short"
-      });
-      const card = document.createElement("div");
-      card.classList.add("forecast-card");
-      forecastContainer.appendChild(card);
-      card.innerHTML = `
-          <p>${dayName}</p>
-          <img src="https:${forecast.day.condition.icon}" alt="Weather">
-          <h3>${forecast.day.mintemp_c}°C - ${forecast.day.maxtemp_c}°C</h3>
+   weatherData = data;
+   updateTemperature();
+   // forecastContainer.innerHTML="";
+   // for(let i=0 ; i < data.forecast.forecastday.length; i++){
+   //    const forecast = data.forecast.forecastday[i];
+   //    const dayName = new Date(forecast.date).toLocaleDateString("en-US", {
+   //       weekday: "short"
+   //    });
+   //    const card = document.createElement("div");
+   //    card.classList.add("forecast-card");
+   //    forecastContainer.appendChild(card);
+   //    card.innerHTML = `
+   //        <p>${dayName}</p>
+   //        <img src="https:${forecast.day.condition.icon}" alt="Weather">
+   //        <h3>${forecast.day.mintemp_c}°C - ${forecast.day.maxtemp_c}°C</h3>
       
-      `;
-      forecastContainer.appendChild(card);
+   //    `;
+   //    forecastContainer.appendChild(card);
 
       // sunrise & sunset
       
@@ -289,7 +305,7 @@ async function getWeather(city){
       sunsetElement.innerText=data.forecast.forecastday[0].astro.sunset;
 
 
-   }
+   // }
  
 
    }
