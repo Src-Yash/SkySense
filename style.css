@@ -81,7 +81,7 @@ body{
 
 .temperature h1{
     font-size:70px;
-    font-weight:500;
+    font-weight:200;
 }
 
 .temperature span{
@@ -204,9 +204,15 @@ hr{
     font-weight:600;
 }
 
-.unit.active{
-    background:#000;
-    color:#fff;
+.active{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    background: black;
+    color:white;
 }
 
 .profile{

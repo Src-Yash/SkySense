@@ -31,7 +31,8 @@ let weatherData = null;
 celsiElement.addEventListener("click", () => {
     currentUnit = "C";
    //  celsiElement.style.backgroundColor="black";
-    celsiElement.style.background="#FFC5AA";
+    celsiElement.classList.add("active")
+    farhenElement.classList.remove("active")
   
 
 
@@ -41,7 +42,10 @@ celsiElement.addEventListener("click", () => {
 
 farhenElement.addEventListener("click", () => {
     currentUnit = "F";
-    farhenElement.style.background="#FFC5AA";
+
+    farhenElement.classList.add("active");
+    celsiElement.classList.remove("active");
+   //  farhenElement.style.background="#FFC5AA";
     updateTemperature();
 });
 
@@ -57,19 +61,16 @@ function resetWeather(){
 
 function searchWeather(){
    const city = searchInput.value.trim();
-
    if(city === ""){
       alert("Please enter the city");
       resetWeather();
       return;
    }
-
    getWeather(city);
 }
 
 
 searchBtn.addEventListener("click",searchWeather);
-
 searchInput.addEventListener("keydown",(event) => {
    if(event.key==="Enter")
      { 
@@ -124,6 +125,7 @@ function updateTemperature(){
          `;
          forecastContainer.appendChild(card);
       });
+
    }
    else{
       temperature.innerText=`${weatherData.current.temp_f}°F`;
