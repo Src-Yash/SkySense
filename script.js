@@ -37,7 +37,7 @@ let aboutBtn = document.querySelector(".aboutBtn")
 
 
 function showForecast(){
-   forecastPage.style.display="";
+   forecastPage.style.display="block";
    aboutPage.style.display="none";
    forecastBtn.classList.add("activeTab");
    aboutBtn.classList.remove("activeTab");
@@ -45,7 +45,7 @@ function showForecast(){
 
 function showAbout(){
    forecastPage.style.display="none";
-   aboutPage.style.display="";
+   aboutPage.style.display="grid";
    aboutBtn.classList.add("activeTab");
    forecastBtn.classList.remove("activeTab");
 }

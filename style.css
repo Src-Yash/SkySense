@@ -182,7 +182,7 @@ hr{
     font-weight:500;
 }
 
-.tabs .active{
+.activeTab{
     color:#000;
     border-bottom:3px solid #000;
 }
@@ -339,11 +339,32 @@ hr{
 /* important */
 
 #aboutPage{
-    border:3px solid red;
+    display: none;
 }
 
 .activeTab{
     color:#000;
     font-weight: 600;
     border-bottom: 2px solid #4d8df5;
+}
+
+.aboutYou{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:20px;
+    margin-top:30px;
+    min-height: 180px;
+}
+
+/* cards  */
+
+.briefCard{
+    grid-column:span 2;
+    padding:24px;
+}
+#dailyBrief{
+    margin-top:15px;
+    line-height: 1.7;
+    font-size: 14px;
+    color:#444;
 }
