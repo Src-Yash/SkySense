@@ -28,6 +28,32 @@ let currentUnit = "C";
 let weatherData = null;
 let cityImage = document.getElementById("cityImage");
 
+let forecastPage=document.getElementById("forecastPage")
+let aboutPage=document.getElementById("aboutPage")
+
+let forecastBtn = document.querySelector(".forecastBtn");
+let aboutBtn = document.querySelector(".aboutBtn")
+
+
+
+function showForecast(){
+   forecastPage.style.display="";
+   aboutPage.style.display="none";
+   forecastBtn.classList.add("activeTab");
+   aboutBtn.classList.remove("activeTab");
+}
+
+function showAbout(){
+   forecastPage.style.display="none";
+   aboutPage.style.display="";
+   aboutBtn.classList.add("activeTab");
+   forecastBtn.classList.remove("activeTab");
+}
+
+forecastBtn.addEventListener("click",showForecast);
+aboutBtn.addEventListener("click",showAbout);
+
+showForecast();
 
 
 celsiElement.addEventListener("click", () => {
@@ -150,19 +176,6 @@ function updateTemperature(){
    }
 }
 
-
-// function getFeelsLikeLevel(feelsLike) {
-//    if (feelsLike < 14)
-//       return "Very Cold";
-//    else if (feelsLike < 27)
-//       return "Cool";
-//    else if (feelsLike < 32)
-//       return "Pleasant";
-//    else if (feelsLike < 40)
-//       return "Hot";
-//    else
-//       return "Extremely Hot";
-// }
 
 
 function getVisibiltyLevel(visibility){

@@ -91,8 +91,9 @@
         
         <header class="top-bar">
             <div class="tabs">
-                <button class = "unit"> Today </button>
-                <button class = "unit"> Week </button>
+                <button class = "forecastBtn"> Forecast </button>
+                <span> |  </span>
+                <button class = "aboutBtn"> About You </button>
             </div>
 
 
@@ -107,55 +108,81 @@
 
         </header>
 
+ 
+        <section id="forecastPage">
         <!-- Forecast -->
-        <div class="forecast-container"></div>
-
-        <!-- Highlights -->
-
-        <section class="highlights">
-            <h2>Today's Highlights</h2>
-            <!-- Cards will be added in Part 2 -->
-            <div class="highlight-grid">
-
-                <div class="card">
-                    <h3>Humidity</h3>
-                    <h1 id="humidity">--%</h1>
-                    <h3 id="humidityLevel">--</h3>
-                </div>
-                <div class="card">
-                    <h3 >Wind Speed</h3>
-                    <h1 id="windSpeed">-- km/h</h1>
-                    <h3 id="speedLevel">--</h3>
-                </div>
-                <div class="card">
-                    <h3>Sunrise & Sunset</h3>
-                    <div class="sunBox">
-                        <div id="Sunrise">--</div>
-                        <div id ="Sunset">--</div>
+            <div class="forecast-container"></div>
+            <!-- Highlights -->
+            
+                <section class="highlights">
+                    <h2>Today's Highlights</h2>
+                    <!-- Cards will be added in Part 2 -->
+                    <div class="highlight-grid">
+                        
+                        <div class="card">
+                            <h3>Humidity</h3>
+                            <h1 id="humidity">--%</h1>
+                            <h3 id="humidityLevel">--</h3>
+                        </div>
+                        <div class="card">
+                            <h3 >Wind Speed</h3>
+                            <h1 id="windSpeed">-- km/h</h1>
+                            <h3 id="speedLevel">--</h3>
+                        </div>
+                        <div class="card">
+                            <h3>Sunrise & Sunset</h3>
+                            <div class="sunBox">
+                                <div id="Sunrise">--</div>
+                                <div id ="Sunset">--</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>UV Index</h3>
+                            <div class="uv-gauge">
+                                <canvas id="uvChart"></canvas>
+                                <div class="uv-value" id="uvValue">                            
+                                    --
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>Pressure</h3>
+                            <h1 id="pressure">-- mb</h1>
+                            <h3 id="pressureLevel">--</h3>
+                        </div>
+                        <div class="card">
+                            <h3>Visibility</h3>
+                            <h1 id="visibility">-- km</h1>
+                            <h3 id="visible">--</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <h3>UV Index</h3>
-                    <div class="uv-gauge">
-                        <canvas id="uvChart"></canvas>
-                        <div class="uv-value" id="uvValue">                            
-                           --
-                       </div> 
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Pressure</h3>
-                    <h1 id="pressure">-- mb</h1>
-                    <h3 id="pressureLevel">--</h3>
-                </div>
-                <div class="card">
-                    <h3>Visibility</h3>
-                    <h1 id="visibility">-- km</h1>
-                    <h3 id="visible">--</h3>
-                </div>
-            </div>
-
+                </section>
         </section>
+
+
+        <section id="aboutPage" class="aboutYou">
+            <div class="briefCard">
+                <h2>Today's Brief</h2>
+                <p id="dailyBrief">Loading...</p>
+            </div>
+            <div class="aqiCard">
+                <h2> Weather Scroe</h2>
+                <h1 id="weatherScore">--</h1>
+            </div>
+            <div class="healthCard">
+                <h2>Health Advice</h2>
+                <ul id="healthTips"></ul>
+            </div>
+            <div class="travelCard">
+                <h2>Travel Advice</h2>
+                <ul id="travelTips"></ul>
+            </div>
+            <div class="foodCard">
+                <h2>Food Suggestion</h2>
+                <ul id="foodSet"></ul>
+            </div>
+        </section>
+        
     </main>
 </div>
 
