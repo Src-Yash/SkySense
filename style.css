@@ -368,3 +368,18 @@ hr{
     font-size: 14px;
     color:#444;
 }
+
+.scoreCard{
+    text-align: center;
+}
+
+.weatherCard{
+    font-size: 60px;
+    color:#4d8df5;
+    margin:15px 0;
+}
+#weatherStatus{
+    font-size: 18px;
+    font-weight: 600;
+    color:#555;
+}
