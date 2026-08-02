@@ -447,9 +447,7 @@ async function getWeather(city){
    
 // }
 
-async function getAIRecommendations(data){
-   const ai=await fetch(`https://generativelanguage.googleapis.com`)
-}
+
 
 
 getWeather("New Delhi");
