@@ -82,99 +82,8 @@ farhenElement.addEventListener("click", () => {
 // section ABOUT YOU Functions
 
 
-function generateDailyBrief(data){
-   const temp = data.current.temp_c;
-   const humidity = data.current.humidity;
-   const uv = data.current.uv;
-   const wind = data.current.wind_kph;
-   const condition = data.current.condition.text;
-   let message = "";
-   if(temp>=38){
-      message+="It's going to be extremly hot today, stay hydrated.<br>"
-   }
-   else if(temp>=30){
-      message+="It's a warm day today.<br>";
-   }
-  
-   else{
-      message+="the weather is pleasant today.<br>";
-   }
-   if(uv>=8){
-      message+="UV is ver high. Wear sunscreen.<br>"
-   }
-   if(humidity>80){
-      message+="Humidity is high. Wear sunscreen. <br>";
-   }
-   if(wind>35){
-      message+="Strong winds are expected.<br>";
-   }
-   if(condition.includes("Rain")){
-      message+="Carry an umbrella today.<br>";
-   }
-
-   dailyBrief.innerHTML=message;
 
 
-};
-
-function calculateWeatherScore(data){
-   let score=100;
-   const temp = data.current.temp_c;
-   
-      if(temp > 38)
-         score -= 25;
-      else if(temp > 34)
-         score -= 15;
-      else if(temp < 10)
-         score -= 20;
-   
-   const humidity = data.current.humidity;
-
-      if(humidity>85){
-         score-=15;
-      }
-
-   const uv=data.current.uv; 
-      if(uv>8){
-         score-=15;
-      }
-   const wind = data.current.wind_kph;
-   
-   if(wind > 40)
-       score -= 20;
-
-   const condition = data.current.condition.text;
-
-   if(condition.includes("Rain"))
-       score -= 15;
-
-   if(score<0){
-      score=0;
-   }
-
-   let status = "";
-
-if(score >= 90)
-    status = "⭐⭐⭐⭐⭐ Excellent";
-
-else if(score >= 75)
-    status = "⭐⭐⭐⭐ Very Good";
-
-else if(score >= 60)
-    status = "⭐⭐⭐ Fair";
-
-else if(score >= 40)
-    status = "⭐⭐ Poor";
-
-else
-    status = "⭐ Stay Indoors";
-
-
-weatherScore.innerText = score + "/100";
-weatherStatus.innerText = status;
-
-      
-}
 
 
 function resetWeather(){
@@ -428,8 +337,10 @@ async function getWeather(city){
       
    sunsetElement.innerText=data.forecast.forecastday[0].astro.sunset;
 
-   generateDailyBrief(data);
-   calculateWeatherScore(data);
+   // generateDailyBrief(data);
+   // calculateWeatherScore(data);
+
+   await getAIRecommendations(data);
 
    // }
  
@@ -443,13 +354,43 @@ async function getWeather(city){
 }
 
 // async function updateCityImage(city){
-//    const image = await fetch(`https://apiunsplash.com/search/photos?query=${city}&client_id=`)
+//    const image = await fetch(`http://apiunsplash.com/search/photos?query=${city}&client_id=`)
    
 // }
 
+async function getAIRecommendations(data)
+{
+   const response = await fetch("http://localhost:3000/recommendations",{
+      method:"POST",
+      headers:{
+         "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+         temperature:data.current.temp_c,
+         humidity:data.current.humidity,
+         condition:data.current.condition.text,
+         wind:data.current.wind_kph,
+         uv:data.current.uv,
+         visibility:data.current.vis_km
+      })
+   });
+   const result = await response.json();
+   console.log(result);
+
+   dailyBrief.innerText = result.brief;
+   weatherScore.innerText = result.score + "/100";
+   weatherStatus.innerText = result.score >= 85 ? "⭐⭐⭐⭐⭐ Excellent" :
+                             result.score >= 70 ? "⭐⭐⭐⭐ Good" :
+                             result.score >= 50 ? "⭐⭐⭐ Fair" :
+                             "⭐⭐ Poor";
+
+   document.getElementById("healthTips").innerHTML = `<li>${result.health}</li>`;
+   document.getElementById("travelTips").innerHTML = `<li>${result.travel}</li>`;
+   document.getElementById("foodSet").innerHTML = `<li>${result.food}</li>`                        
+}
 
 
 
-getWeather("New Delhi");
+// getWeather("New Delhi");
 
 

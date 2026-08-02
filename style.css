@@ -368,11 +368,48 @@ hr{
     font-size: 14px;
     color:#444;
 }
-
-.scoreCard{
-    text-align: center;
+.healthCard{
+    grid-column:span 2;
+    padding:24px;
+}
+#healthTips{
+    margin-top:15px;
+    line-height: 1.7;
+    font-size: 14px;
+    color:#444;
+}
+.travelCard{
+    grid-column:span 2;
+    padding:24px;
+}
+#travelTips{
+    margin-top:15px;
+    line-height: 1.7;
+    font-size: 14px;
+    color:#444;
+}
+.foodCard{
+    grid-column:span 2;
+    padding:24px;
+}
+#foodSet{
+    margin-top:15px;
+    line-height: 1.7;
+    font-size: 14px;
+    color:#444;
 }
 
+.scoreCard{
+    grid-column:span 2;
+    padding:24px;
+}
+
+#weatherStatus{
+    margin-top:15px;
+    line-height: 1.7;
+    font-size: 14px;
+    color:#444;
+}
 .weatherCard{
     font-size: 60px;
     color:#4d8df5;
