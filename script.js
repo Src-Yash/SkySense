@@ -36,6 +36,7 @@ let aboutBtn = document.querySelector(".aboutBtn")
 let dailyBrief = document.getElementById("dailyBrief")
 let weatherScore = document.getElementById("weatherScore");
 let weatherStatus = document.getElementById("weatherStatus");
+let  loader = document.getElementById("loader");
 
 function showForecast(){
    forecastPage.style.display="block";
@@ -249,10 +250,14 @@ let uvChart = new Chart(ctx,{
 
 async function getWeather(city){
 
+   loader.style.dispaly="block";
+   searchBtn.style.pointerEvents = "none";
+   searchBtn.style.opacity = "0.5";
+   searchBtn.disabled = true;
    try{
-   const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=82c6260c88cb444aa5604743262507&q=${city}&days=7`)
-   const data = await response.json();
-   console.log(data);
+      const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=82c6260c88cb444aa5604743262507&q=${city}&days=7`)
+      const data = await response.json();
+      console.log(data);
 
    // console.log(data.forecast.forecastday[0].day.mintemp_f);
    
@@ -343,6 +348,11 @@ async function getWeather(city){
    await getAIRecommendations(data);
 
    // }
+
+   searchBtn.style.pointerEvents = "auto";
+   searchBtn.style.opacity = "1";
+   searchBtn.disabled = false;
+   loader.style.display="none";
  
    }
 
@@ -351,7 +361,14 @@ async function getWeather(city){
       
       console.log(error);
     }
-}
+
+    finally{
+        loader.style.display="none";
+        searchBtn.style.pointerEvents = "auto";
+        searchBtn.style.opacity = "1";
+        searchInput.disabled = false;
+    }
+    }
 
 // async function updateCityImage(city){
 //    const image = await fetch(`http://apiunsplash.com/search/photos?query=${city}&client_id=`)
@@ -391,6 +408,6 @@ async function getAIRecommendations(data)
 
 
 
-// getWeather("New Delhi");
+getWeather("New Delhi");
 
 

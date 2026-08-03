@@ -65,15 +65,16 @@ app.post("/recommendations",async (req,res) => {
     
     console.log(response.text);
     let text = response.text
-    .replace(/```json/g, "")
-    .replace(/```/g, "")
+    .replace(/```json/g,"")
+    .replace(/```/g,"")
     .trim();
-
+  
     if (!response.ok) {
     const error = await response.json();
     console.error(error);
     alert("AI service is temporarily unavailable. Please try again in a minute.");
     return;
+    
 }
 
     const result = await response.json();
