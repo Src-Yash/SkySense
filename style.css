@@ -203,6 +203,16 @@ hr{
     background:#ececec;
     font-weight:600;
 }
+.unitC{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background:black;
+    color:white;
+    font-weight:600;
+}
 
 .active{
     width:42px;
@@ -441,4 +451,16 @@ hr{
     to{
         transform:rotate(360deg);
     }
+}
+
+.error-box{
+    display:none;
+    margin-top:12px;
+    padding:12px 15px;
+    border-radius:10px;
+    background: #ffe5e5;
+    color:#c62828;
+    font-size:14px;
+    font-weight:500;
+    border-left: 5px solid #e53935;
 }
