@@ -192,12 +192,13 @@ async function getWeather(city){
 
       if(error.message.includes("No matching location")){
           showError("City not found. Please try another city.");
+          resetWeather();
       }
       else{
-          showError("Unable to fetch weather data. Please try again.");
+          showError("Unable to update the About You section.");
       }
 
-      resetWeather();
+      // resetWeather();
    }
 
 

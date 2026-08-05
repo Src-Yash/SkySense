@@ -2,7 +2,7 @@
 
 
 async function fetchWeather(city){
-   const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=82c6260c88cb444aa5604743262507&q=${city}&days=7`)
+   const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${city}&days=7`)
          const data = await response.json();
          console.log(data);
    
