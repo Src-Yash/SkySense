@@ -36,8 +36,26 @@ const travelTips = document.getElementById("travelTips");
 const foodSet = document.getElementById("foodSet");
 const loader = document.getElementById("loader");
 let errorBox = document.getElementById("errorBox");
+const locationBtn = document.querySelector(".fa-location-crosshairs");
 
 
+
+locationBtn.addEventListener("click", getCurrentLocation);
+
+
+function getCurrentLocation(){
+   if(!navigator.geolocation){
+      showError("Geolocation is not supported by this browser.");
+      return;
+   }
+   loader.style.display = "block";
+   
+// so this is the function used to locate the position for the updation
+   navigator.geolocation.getCurrentPosition(
+      successLocation,
+      errorLocation
+   );
+}
 
    forecastBtn.addEventListener("click",showForecast);
    aboutBtn.addEventListener("click",showAbout);
@@ -132,18 +150,21 @@ let uvChart = new Chart(ctx,{
 });
 
 
+
 async function getWeather(city){
 
    searchBtn.disabled = true;
    searchInput.disabled = true;
    loader.style.display = "block";
-   searchInput.placeholder = "Fetching weather ... ";
+   searchInput.placeholder = "Getting your location... ";
    document.body.style.cursor = "wait";
    
    try{
 
       
         const data = await fetchWeather(city);
+
+        searchInput.value =data.location.name;
 
         weatherData = data;
 
@@ -184,6 +205,7 @@ async function getWeather(city){
         loader.style.display="none";
         searchBtn.style.opacity = "1";
         searchInput.disabled = false;
+        
         searchBtn.disabled = false;
         searchInput.placeholder = "Search for places...";
         document.body.style.cursor = "default";
@@ -195,6 +217,33 @@ async function getWeather(city){
    
 // }
 
+async function successLocation(position){
+   const latitude = position.coords.latitude;
+   const longitude = position.coords.longitude;
+
+   await getWeather(`${latitude},${longitude}`);
+}
+
+
+function errorLocation(error){
+   loader.style.display = "none";
+   switch(error.code){
+      case error.PERMISSION_DENIED:
+         showError("Location permission denied");
+         break;
+      
+      case error.POSITION_UNAVAILABLE:
+         showError("Location Unavailable");
+         break;
+      
+      case error.TIMEOUT:
+         showError("Location request time out");
+         break;
+      
+      default:
+         showError("Unable to get your location");
+   }
+}
 getWeather("New Delhi");
 
 
