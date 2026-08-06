@@ -28,17 +28,17 @@
       <h1>SkySense</h1>
         <!-- Search -->
 
-        <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass" id="search-btn"></i>
-            <input id="search-input" type="search" placeholder="Search for places...">
-            <i class="fa-solid fa-location-crosshairs"></i>
-            <!-- DROPDOWN -->
-        </div>
+       <div class="search-container"> 
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass" id="search-btn"></i>
+                <input id="search-input" type="search" placeholder="Search for places...">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <!-- DROPDOWN -->
+            </div>
+            <div id="recentDropdown" class="recent-dropdown"></div>
+       </div> 
        
-        <div class="search-history">
-            <h4>Recent Searches</h4>
-            <ul id="historyList"></ul>
-        </div>
+        
         <div id="loader" class="loader"></div>
         <div id="errorBox" class="error-box"></div>
 
@@ -99,9 +99,9 @@
         
         <header class="top-bar">
             <div class="tabs">
-                <button class = "forecastBtn"> Forecast </button>
+                <button id="forecastButton" class = "forecastBtn"> Forecast </button>
                 <span> |  </span>
-                <button class = "aboutBtn"> About You </button>
+                <button id="aboutButton" class = "aboutBtn"> About You </button>
             </div>
 
 
@@ -201,6 +201,6 @@
 <script src="js/script.js"></script>
 
 
-
+<div class="rain"></div>
 </body>
 </html>

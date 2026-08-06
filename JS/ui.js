@@ -160,16 +160,17 @@ function updateBackground(condition){
       main.className = "main-content rainy";
    }
    else if(condition.includes("cloud")){
-        main.className = "main-content cloudy";
+      main.className = "main-content cloudy";
    }
    else if(condition.includes("snow")){
-       main.className = "main-content snowy";
+      main.className = "main-content snowy";
    }
    else if(condition.includes("thunder")){
-       main.className = "main-content storm";
+      main.className = "main-content storm";
+      main.forecastButton.style.Color="#1d1c1c";
    }
    else{
-       main.className = "main-content";
+      main.className = "main-content";
    }
 
 }

@@ -37,38 +37,60 @@ const foodSet = document.getElementById("foodSet");
 const loader = document.getElementById("loader");
 let errorBox = document.getElementById("errorBox");
 const locationBtn = document.querySelector(".fa-location-crosshairs");
-const historyList = document.getElementById("historyList");
-const historyDropdown = document.getElementById("history")
+const recentDropdown = document.getElementById("recentDropdown");
+const forecastButton = document.getElementById("forecastButton");
+const aboutButton = document.getElementById("aboutButton");
 
 
 
 let searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
-
 function renderSearchHistory(){
-   historyList.innerHTML="";
-   searchHistory.forEach(city => {
-      const li = document.createElement("li");
-      li.innerHTML = `📍${city}`;
-      li.addEventListener("click",() => {
-         searchInput.value = city;
-         getWeather(city);
-      });
-      historyList.appendChild(li);
-   });
+
+    const history =
+    JSON.parse(localStorage.getItem("searchHistory")) || [];
+    recentDropdown.innerHTML = "";
+    history.forEach(city=>{
+        const item=document.createElement("div");
+        item.className="recent-item";
+        item.innerHTML=`📍 ${city}`;
+        item.onclick=()=>{
+            searchInput.value=city;
+            recentDropdown.style.display="none";
+            getWeather(city);
+        };
+        recentDropdown.appendChild(item);
+
+    });
+
 }
 
-function saveSearch(city){
-   searchHistory = searchHistory.filter(item => item !==city);
-   searchHistory.unshift(city);
-   if(searchHistory.length > 5){
-      searchHistory.pop();
-   }
-   localStorage.setItem(
-      "searchHistory",JSON.stringify(searchHistory)
-   );
+searchInput.addEventListener("focus",()=>{
 
-   renderSearchHistory();
+    renderSearchHistory();
+    recentDropdown.style.display="block";
+});
+
+
+document.addEventListener("click",(e)=>{
+    if(!document.querySelector(".search-container").contains(e.target)){
+        recentDropdown.style.display="none";
+    }
+});
+
+
+function saveSearch(city){
+    city = city.trim();
+    if(city==="" || city==="null") return;
+    let history =
+    JSON.parse(localStorage.getItem("searchHistory")) || [];
+    history = history.filter(item=>item!==city);
+    history.unshift(city);
+    history = history.slice(0,5);
+    localStorage.setItem(
+        "searchHistory",
+        JSON.stringify(history)
+    );
 }
 
 locationBtn.addEventListener("click", getCurrentLocation);
