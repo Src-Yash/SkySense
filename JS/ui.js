@@ -153,6 +153,7 @@ function updateBackground(condition){
    stopRain();
    stopClouds();
    stopLightning();
+   stopSun();
 
 
    const main = document.querySelector(".main-content");
@@ -186,6 +187,9 @@ function updateBackground(condition){
    }
    if(condition.includes("thunder")){
       createLightning();
+   }
+   if(condition.includes("sun") || condition.includes("clear")){
+      createSun();
    }
 }
 
@@ -264,4 +268,13 @@ function stopLightning(){
     const flash = document.querySelector(".lightning");
     flash.style.animation="none";
     flash.style.opacity=0;
+}
+
+function createSun(){
+    const sun = document.querySelector(".sun");
+    sun.style.display = "block";
+}
+
+function stopSun(){
+    document.querySelector(".sun").style.display = "none";
 }

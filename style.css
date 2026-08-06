@@ -504,7 +504,7 @@ hr{
 /* dynamically background update */
 
 .sunny{
-    background:linear-gradient(135deg,#89f7fe,#66a6ff);
+    background: linear-gradient(123deg, rgba(153, 190, 255, 1) 44%, rgba(255, 214, 245, 1) 82%);
 }
 .rainy{
     background:linear-gradient(135deg,#485563,#29323c);
@@ -652,6 +652,54 @@ hr{
 
     100%{
         opacity:0;
+    }
+
+}
+
+.sun{
+
+    position:fixed;
+    top:60px;
+    right:40px;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:radial-gradient(
+        circle,
+        #FFD54F 0%,
+        #FFC107 50%,
+        rgba(255,193,7,.2) 100%
+    );
+    box-shadow:
+        0 0 40px #FFD54F,
+        0 0 80px rgba(255,213,79,.7),
+        0 0 120px rgba(255,213,79,.5);
+    display:none;
+    pointer-events:none;
+    animation:
+        sunGlow 3s ease-in-out infinite;
+    z-index:1;
+}
+
+@keyframes sunGlow{
+
+    0%{
+        transform:scale(1);
+        box-shadow:
+        0 0 40px #FFD54F,
+        0 0 80px rgba(255,213,79,.6);
+    }
+    50%{
+        transform:scale(1.08);
+        box-shadow:
+        0 0 70px #FFD54F,
+        0 0 120px rgba(255,213,79,.9);
+    }
+    100%{
+        transform:scale(1);
+        box-shadow:
+        0 0 40px #FFD54F,
+        0 0 80px rgba(255,213,79,.6);
     }
 
 }
