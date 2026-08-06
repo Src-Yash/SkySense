@@ -173,4 +173,29 @@ function updateBackground(condition){
       main.className = "main-content";
    }
 
+
+   stopRain();
+   if(condition.toLowerCase().includes("rain")){
+      createRain();
+   }
+}
+
+
+function createRain(){
+   const rain = document.querySelector(".rain");
+   rain.innerHTML="";
+   rain.style.display="block";
+   for(let i=0;i<120;i++){
+      const drop = document.createElement("div");
+      drop.className="drop";
+      drop.style.left=Math.random()*100+"vw";
+      drop.style.animationDuration=(0.5+Math.random())+"s";
+      drop.style.animationDelay=Math.random()+"s";
+
+      rain.appendChild(drop);
+   }
+}
+
+function stopRain(){
+   document.querySelector(".rain").style.display = "none";
 }
