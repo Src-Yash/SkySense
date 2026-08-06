@@ -152,6 +152,7 @@ function updateForecast(data){
 function updateBackground(condition){
    stopRain();
    stopClouds();
+   stopLightning();
 
 
    const main = document.querySelector(".main-content");
@@ -170,7 +171,6 @@ function updateBackground(condition){
    }
    else if(condition.includes("thunder")){
       main.className = "main-content storm";
-      main.forecastButton.style.Color="#1d1c1c";
    }
    else{
       main.className = "main-content";
@@ -184,8 +184,10 @@ function updateBackground(condition){
    if(condition.toLowerCase().includes("cloud")){
       createClouds();
    }
+   if(condition.includes("thunder")){
+      createLightning();
+   }
 }
-
 
 function createRain(){
    const rain = document.querySelector(".rain");
@@ -242,4 +244,24 @@ function createClouds(){
 }
 function stopClouds(){
    document.querySelector(".cloud-container").style.display="none";
+}
+
+let lightningInterval;
+
+function createLightning(){
+
+    const flash = document.querySelector(".lightning");
+    flash.style.display = "block";
+    lightningInterval = setInterval(()=>{
+        flash.style.animation="none";
+        flash.offsetHeight;
+        flash.style.animation="lightningFlash .5s";
+    },4000+Math.random()*4000);
+
+}
+function stopLightning(){
+    clearInterval(lightningInterval);
+    const flash = document.querySelector(".lightning");
+    flash.style.animation="none";
+    flash.style.opacity=0;
 }

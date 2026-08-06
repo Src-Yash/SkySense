@@ -226,7 +226,7 @@ async function getWeather(city){
         updateSidebar(data);
 
         updateBackground(data.current.condition.text);
-
+        createLightning();
         const cityImageData = await fetchCityImage(
          data.location.name,
          data.location.country
