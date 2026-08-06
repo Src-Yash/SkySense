@@ -38,7 +38,7 @@ const loader = document.getElementById("loader");
 let errorBox = document.getElementById("errorBox");
 const locationBtn = document.querySelector(".fa-location-crosshairs");
 const historyList = document.getElementById("historyList");
-
+const historyDropdown = document.getElementById("history")
 
 
 
@@ -203,6 +203,9 @@ async function getWeather(city){
 
         updateSidebar(data);
 
+        const cityImageData =await fetchCityImage(data.location.name);
+        updateCityImage(cityImageData.image);
+
         updateHighlights(data);
 
         updateDateTime(data);
@@ -211,7 +214,7 @@ async function getWeather(city){
 
         updateForecast(data);
 
-        const ai =
+        const ai = 
         await FetchAIRecommendations(data);
         console.log(ai);
 

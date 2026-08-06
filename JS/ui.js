@@ -33,6 +33,12 @@ function updateSidebar(data){
          weatherIcon.src = `https:${data.current.condition.icon}`;
 }
 
+function updateCityImage(image){
+
+   cityImage.src=image;
+
+}
+
 function updateHighlights(data){
 
 
