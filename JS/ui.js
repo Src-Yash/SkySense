@@ -150,6 +150,9 @@ function updateForecast(data){
 
 
 function updateBackground(condition){
+   stopRain();
+   stopClouds();
+
 
    const main = document.querySelector(".main-content");
    condition = condition.toLowerCase();
@@ -174,9 +177,12 @@ function updateBackground(condition){
    }
 
 
-   stopRain();
    if(condition.toLowerCase().includes("rain")){
       createRain();
+   }
+
+   if(condition.toLowerCase().includes("cloud")){
+      createClouds();
    }
 }
 
@@ -198,4 +204,42 @@ function createRain(){
 
 function stopRain(){
    document.querySelector(".rain").style.display = "none";
+}
+
+
+function createClouds(){
+
+    const container =
+    document.querySelector(".cloud-container");
+
+    container.innerHTML="";
+
+    container.style.display="block";
+
+    for(let i=0;i<6;i++){
+
+        const cloud=document.createElement("img");
+
+        cloud.src="assets/weather/pngwing.com.png";
+
+        cloud.className="cloud";
+
+        cloud.style.top=Math.random()*50+"%";
+
+        cloud.style.width=
+        (120+Math.random()*120)+"px";
+
+        cloud.style.animationDuration=
+        (25+Math.random()*20)+"s";
+
+        cloud.style.animationDelay=
+        Math.random()*10+"s";
+
+        container.appendChild(cloud);
+
+    }
+
+}
+function stopClouds(){
+   document.querySelector(".cloud-container").style.display="none";
 }
