@@ -9,7 +9,8 @@ const app = express();
 const ai = new GoogleGenAI({
   apiKey:process.env.GEMINI_API_KEY,
 });
-
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +19,23 @@ app.get("/", (req, res) => {
     res.send("Hello from SkySense Backend!");
 });
 
+
+// weather api
+
+app.get("/weather/:city", async (req, res) => {
+    try {
+        
+        const city = req.params.city;
+        const url = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${city}&days=7`;
+        const response = await fetch(url);
+        const data = await response.json();
+        res.json(data);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+});
 
 // new api
 
