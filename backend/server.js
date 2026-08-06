@@ -6,6 +6,8 @@ const {GoogleGenAI} = require("@google/genai");
 
 const app = express();
 
+// Gemini API
+
 const ai = new GoogleGenAI({
   apiKey:process.env.GEMINI_API_KEY,
 });
@@ -27,6 +29,7 @@ app.get("/weather/:city", async (req, res) => {
         
         const city = req.params.city;
         const url = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${city}&days=7`;
+
         const response = await fetch(url);
         const data = await response.json();
         res.json(data);
@@ -35,6 +38,38 @@ app.get("/weather/:city", async (req, res) => {
         console.error(error);
         res.status(500).json({ error: error.message });
     }
+});
+
+// Image API
+
+app.get("/city-image/:city", async (req, res) => {
+
+    try{
+        const city = req.params.city;
+        const response = await fetch(
+            `https://api.unsplash.com/search/photos?query=${city}&per_page=1&client_id=${UNSPLASH_ACCESS_KEY}`
+        );
+        const data = await response.json();
+
+        if(data.results.length === 0){
+            return res.json({
+                image:"assets/images/city.jpg"
+            });
+
+        }
+
+        res.json({
+            image:data.results[0].urls.regular
+        });
+    }
+
+    catch(error){
+        res.status(500).json({
+            error:error.message
+        });
+
+    }
+
 });
 
 // new api
