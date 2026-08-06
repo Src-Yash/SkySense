@@ -490,3 +490,7 @@ hr{
     background:#dceeff;
     transform :translateX(4px);
 }
+
+.city-card{
+    transition: .5s;
+}
