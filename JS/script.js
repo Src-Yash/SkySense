@@ -203,7 +203,15 @@ async function getWeather(city){
 
         updateSidebar(data);
 
-        const cityImageData =await fetchCityImage(data.location.name);
+        updateBackground(data.current.condition.text);
+
+        const cityImageData = await fetchCityImage(
+         data.location.name,
+         data.location.country
+        );
+
+        console.log(cityImageData);
+        
         updateCityImage(cityImageData.image);
 
         updateHighlights(data);
@@ -283,6 +291,6 @@ function errorLocation(error){
 }
 
 renderSearchHistory();
-getWeather("New Delhi");
+getWeather("New delhi");
 
 

@@ -41,10 +41,7 @@ function updateCityImage(image){
       cityImage.onload = () => {
          cityImage.style.opacity = "1";
       };
-      cityImage.onerror = () => {
-         cityImage.src = "assets/images/default-city.jpg";
-         cityImage.style.opacity = "1";
-      };
+      
    },300)
 
 }
@@ -149,4 +146,30 @@ function updateForecast(data){
                 forecastContainer.appendChild(card);
       });
     }
+}
+
+
+function updateBackground(condition){
+
+   const main = document.querySelector(".main-content");
+   condition = condition.toLowerCase();
+   if(condition.includes("sun")){
+      main.className = "main-content sunny";
+   }
+   else if(condition.includes("rain")){
+      main.className = "main-content rainy";
+   }
+   else if(condition.includes("cloud")){
+        main.className = "main-content cloudy";
+   }
+   else if(condition.includes("snow")){
+       main.className = "main-content snowy";
+   }
+   else if(condition.includes("thunder")){
+       main.className = "main-content storm";
+   }
+   else{
+       main.className = "main-content";
+   }
+
 }

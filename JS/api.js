@@ -38,9 +38,10 @@ async function FetchAIRecommendations(data)
    // document.getElementById("foodSet").innerHTML = `<li>${result.food}</li>`                        
 }
 
-async function fetchCityImage(city){
-
-   const response = await fetch(`http://localhost:3000/city-image/${city}`);
+async function fetchCityImage(city,country){
+   const response = await fetch(
+      `http://localhost:3000/city-image/${encodeURIComponent(city)}/${encodeURIComponent(country)}`
+   );
    return await response.json();
    
 }
