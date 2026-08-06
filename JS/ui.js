@@ -35,7 +35,17 @@ function updateSidebar(data){
 
 function updateCityImage(image){
 
-   cityImage.src=image;
+   cityImage.style.opacity = "0";
+   setTimeout(() => {
+      cityImage.src=image;
+      cityImage.onload = () => {
+         cityImage.style.opacity = "1";
+      };
+      cityImage.onerror = () => {
+         cityImage.src = "assets/images/default-city.jpg";
+         cityImage.style.opacity = "1";
+      };
+   },300)
 
 }
 
