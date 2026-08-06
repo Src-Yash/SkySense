@@ -1,17 +1,11 @@
 
 
-
 async function fetchWeather(city){
-   const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${city}&days=7`)
-         const data = await response.json();
-         console.log(data);
-   
-         if(data.error){
-            
-            throw new Error(data.error.message);
-         }
-         return data;
+   const response = await fetch(`http://localhost:3000/weather/${city}`);
+
+   return await response.json();
 }
+
 
 async function FetchAIRecommendations(data)
 {

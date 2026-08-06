@@ -163,6 +163,7 @@ async function getWeather(city){
 
       
         const data = await fetchWeather(city);
+        console.log(data);
 
         searchInput.value =data.location.name;
 
