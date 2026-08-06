@@ -57,6 +57,11 @@ app.get("/city-image/:city", async (req, res) => {
             });
 
         }
+        else{
+            return res.json({
+                image: "assets/images/default-city.jpg"
+            });
+        }
 
         res.json({
             image:data.results[0].urls.regular
@@ -65,7 +70,7 @@ app.get("/city-image/:city", async (req, res) => {
 
     catch(error){
         res.status(500).json({
-            error:error.message
+          error:error.message
         });
 
     }
