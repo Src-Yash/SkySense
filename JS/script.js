@@ -37,8 +37,39 @@ const foodSet = document.getElementById("foodSet");
 const loader = document.getElementById("loader");
 let errorBox = document.getElementById("errorBox");
 const locationBtn = document.querySelector(".fa-location-crosshairs");
+const historyList = document.getElementById("historyList");
 
 
+
+
+let searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+
+function renderSearchHistory(){
+   historyList.innerHTML="";
+   searchHistory.forEach(city => {
+      const li = document.createElement("li");
+      li.innerHTML = `📍${city}`;
+      li.addEventListener("click",() => {
+         searchInput.value = city;
+         getWeather(city);
+      });
+      historyList.appendChild(li);
+   });
+}
+
+function saveSearch(city){
+   searchHistory = searchHistory.filter(item => item !==city);
+   searchHistory.unshift(city);
+   if(searchHistory.length > 5){
+      searchHistory.pop();
+   }
+   localStorage.setItem(
+      "searchHistory",JSON.stringify(searchHistory)
+   );
+
+   renderSearchHistory();
+}
 
 locationBtn.addEventListener("click", getCurrentLocation);
 
@@ -161,9 +192,10 @@ async function getWeather(city){
    
    try{
 
-      
         const data = await fetchWeather(city);
         console.log(data);
+
+        saveSearch(city);
 
         searchInput.value =data.location.name;
 
@@ -246,6 +278,8 @@ function errorLocation(error){
          showError("Unable to get your location");
    }
 }
+
+renderSearchHistory();
 getWeather("New Delhi");
 
 
