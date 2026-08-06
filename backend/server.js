@@ -42,37 +42,41 @@ app.get("/weather/:city", async (req, res) => {
 
 // Image API
 
-app.get("/city-image/:city", async (req, res) => {
+app.get("/city-image/:city/:country", async (req, res) => {
 
-    try{
+    try {
+
         const city = req.params.city;
+        const country = req.params.country;
+        const query = `${city} ${country} skyline landmark`;
+        console.log("Query:", query);
+        console.log("City:", city);
+
         const response = await fetch(
-            `https://api.unsplash.com/search/photos?query=${city}&per_page=1&client_id=${UNSPLASH_ACCESS_KEY}`
-        );
+                `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
+              );
+
         const data = await response.json();
 
-        if(data.results.length === 0){
-            return res.json({
-                image:"assets/images/city.jpg"
-            });
+        console.log(data);
 
-        }
-        else{
-            return res.json({
-                image: "assets/images/default-city.jpg"
-            });
+        if (!data.results || data.results.length === 0) {
+             return res.json({
+                 image:"/assets/images/default-city.jpg"
+             });             
         }
 
         res.json({
-            image:data.results[0].urls.regular
-        });
-    }
-
-    catch(error){
-        res.status(500).json({
-          error:error.message
+            image: data.results[0].urls.regular
         });
 
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(404).json({
+                 message: "No image found for this city."
+             });
     }
 
 });
