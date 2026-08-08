@@ -28,7 +28,7 @@ function getWindLevel(windSpeed) {
 }
 
 
-function getVisibiltyLevel(visibility){
+function getVisibilityLevel(visibility){
    if(visibility < 1)
       return "Very Poor";
    else if(visibility <= 4)
