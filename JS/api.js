@@ -1,7 +1,7 @@
-
+const API_BASE_URL = "https://skysense-9udy.onrender.com";
 
 async function fetchWeather(city){
-   const response = await fetch(`http://localhost:3000/weather/${city}`);
+   const response = await fetch(`${API_BASE_URL}/weather/${encodeURIComponent(city)}`);
 
    return await response.json();
 }
@@ -9,7 +9,7 @@ async function fetchWeather(city){
 
 async function fetchAIRecommendations(data)
 {
-   const response = await fetch("http://localhost:3000/recommendations",{
+   const response = await fetch(`${API_BASE_URL}/recommendations`,{
       method:"POST",
       headers:{
          "Content-Type":"application/json"
@@ -25,22 +25,12 @@ async function fetchAIRecommendations(data)
    }
 );
    return await response.json();
-
-   // dailyBrief.innerText = result.brief;
-   // weatherScore.innerText = result.score + "/100";
-   // weatherStatus.innerText = result.score >= 85 ? "⭐⭐⭐⭐⭐ Excellent" :
-   //                           result.score >= 70 ? "⭐⭐⭐⭐ Good" :
-   //                           result.score >= 50 ? "⭐⭐⭐ Fair" :
-   //                           "⭐⭐ Poor";
-
-   // document.getElementById("healthTips").innerHTML = `<li>${result.health}</li>`;
-   // document.getElementById("travelTips").innerHTML = `<li>${result.travel}</li>`;
-   // document.getElementById("foodSet").innerHTML = `<li>${result.food}</li>`                        
+                        
 }
 
 async function fetchCityImage(city,country){
    const response = await fetch(
-      `http://localhost:3000/city-image/${encodeURIComponent(city)}/${encodeURIComponent(country)}`
+      `${API_BASE_URL}/city-image/${encodeURIComponent(city)}/${encodeURIComponent(country)}`
    );
    return await response.json();
    
