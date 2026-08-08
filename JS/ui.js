@@ -64,7 +64,7 @@ function updateHighlights(data){
          
          const visibleIndex = data.current.vis_km;
          visibilityElement.innerText = data.current.vis_km + "Km";
-         visibilityLevel.innerText =getVisibiltyLevel(visibleIndex);
+         visibilityLevel.innerText =getVisibilityLevel(visibleIndex);
          
          
          const press = data.current.pressure_mb;

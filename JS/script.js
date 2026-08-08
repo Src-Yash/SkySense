@@ -20,7 +20,7 @@ const forecastContainer = document.querySelector(".forecast-container");
 const sunriseElement = document.getElementById("Sunrise");
 const sunsetElement =document.getElementById("Sunset");
 const celsiElement = document.getElementById("celsi");
-const farhenElement = document.getElementById("farhen")
+const fahrenElement = document.getElementById("fahren")
 let currentUnit = "C";
 let weatherData = null;
 const cityImage = document.getElementById("cityImage");
@@ -124,11 +124,11 @@ function getCurrentLocation(){
       updateForecast(weatherData);
     }
     celsiElement.classList.add("active")
-    farhenElement.classList.remove("active")
+    fahrenElement.classList.remove("active")
    
    });     
 
-   farhenElement.addEventListener("click", () => {
+   fahrenElement.addEventListener("click", () => {
     currentUnit = "F";
     
     if(weatherData){
@@ -136,7 +136,7 @@ function getCurrentLocation(){
         updateForecast(weatherData);
     }
 
-    farhenElement.classList.add("active");
+    fahrenElement.classList.add("active");
     celsiElement.classList.remove("active");
     celsiElement.classList.remove("unitC");
     celsiElement.classList.add("unit");
@@ -215,7 +215,6 @@ async function getWeather(city){
    try{
 
         const data = await fetchWeather(city);
-        console.log(data);
 
         saveSearch(city);
 
@@ -226,13 +225,11 @@ async function getWeather(city){
         updateSidebar(data);
 
         updateBackground(data.current.condition.text);
-        createLightning();
+       
         const cityImageData = await fetchCityImage(
          data.location.name,
          data.location.country
         );
-
-        console.log(cityImageData);
         
         updateCityImage(cityImageData.image);
 
@@ -245,8 +242,7 @@ async function getWeather(city){
         updateForecast(data);
 
         const ai = 
-        await FetchAIRecommendations(data);
-        console.log(ai);
+        await fetchAIRecommendations(data);
 
         updateAboutYou(ai);
 
