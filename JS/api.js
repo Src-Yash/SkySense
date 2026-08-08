@@ -7,7 +7,7 @@ async function fetchWeather(city){
 }
 
 
-async function FetchAIRecommendations(data)
+async function fetchAIRecommendations(data)
 {
    const response = await fetch("http://localhost:3000/recommendations",{
       method:"POST",
